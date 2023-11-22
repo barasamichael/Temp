@@ -1,0 +1,120 @@
+{% extends "dashboard.html" %}
+{% block title %}
+Add Book
+{% endblock %}
+
+{% block page_content %}
+<div class="bg-gray-200 items-center justify-center">
+    <!-- Book addition form -->
+    <div class="bg-white p-8 w-full overflow-y-auto">
+        <h2 class="text-2xl font-semibold mb-6">Add Book</h2>
+        <form id="bookAdditionForm" class="space-y-4">
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" required
+                    class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+            </div>
+
+            <div>
+                <label for="summary" class="block text-sm font-medium text-gray-700">Summary</label>
+                <textarea id="summary" name="summary" rows="4" required
+                    class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+
+            <div>
+                <label for="publisher" class="block text-sm font-medium text-gray-700">Publisher</label>
+                <input type="text" id="publisher" name="publisher" required
+                    class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+            </div>
+
+            <div>
+                <label for="yearPublished" class="block text-sm font-medium text-gray-700">Year Published</label>
+                <input type="number" id="yearPublished" name="yearPublished" required
+                    class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+            </div>
+
+            <div>
+                <label for="edition" class="block text-sm font-medium text-gray-700">Edition</label>
+                <input type="text" id="edition" name="edition" required
+                    class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+            </div>
+
+            <button type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                Add Book
+            </button>
+        </form>
+        <div id="errorAlert" class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md hidden">
+            <!-- Error messages will appear here -->
+        </div>
+        <div id="successAlert" class="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded-md hidden">
+            <!-- Success messages will appear here -->
+        </div>
+    </div>
+
+    <!-- Fetch API Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookAdditionForm = document.getElementById('bookAdditionForm');
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
+
+            function displaySuccess(successMessage) {
+                successAlert.textContent = successMessage;
+                successAlert.classList.remove('hidden');
+                setTimeout(function () {
+                    successAlert.classList.add('hidden');
+                }, 10000);
+            }
+
+            function displayError(errorMessage) {
+                errorAlert.textContent = errorMessage;
+                errorAlert.classList.remove('hidden');
+                setTimeout(function () {
+                    errorAlert.classList.add('hidden');
+                }, 10000);
+            }
+
+            bookAdditionForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(bookAdditionForm);
+                const data = {
+                    title: formData.get('title'),
+                    summary: formData.get('summary'),
+                    publisher: formData.get('publisher'),
+                    yearPublished: formData.get('yearPublished'),
+                    edition: formData.get('edition')
+                };
+
+		const serverName = '{{ api_server }}';
+                const apiUrl = `${serverName}api/administration/books`;
+
+                fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(responseData => {
+                        // Handle successful book addition
+                        displaySuccess('Book added successfully');
+			bookAdditionForm.reset();
+                    })
+                    .catch(error => {
+                        // Handle book addition errors
+                        console.error('Error during book addition:', error);
+                        displayError('Book addition failed. Please check your information and try again.', errorAlert);
+                    });
+            });
+        });
+    </script>
+    </div>
+    {% endblock %}

@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}
+Karibu
+{% endblock %}
+
+{% block page_content %}
+<div class="text-center relative">
+	<img src="/static/img/main/image.jpg" alt="{{ app_name }} Image" class="w-full h-96 object-cover" loading="lazy">
+	<div class="absolute inset-0 flex flex-col items-center justify-center bg-opacity-70 text-white bg-gray-800 p-10">
+		<div class="container mx-auto text-center th-15">
+			<h2 class="text-3xl font-semibold">Welcome to {{ app_name }}</h2>
+			<p class="text-lg my-6">
+			Join our vibrant community where everyone has the opportunity to achieve their fullest potential and participate in and contribute positively to all aspects of life. <br>
+			Create your account and start participating in raffles.</p>
+			<a href="{{ url_for('registration.register_user') }}" class="bg-yellow-500 text-white py-4 px-6 rounded-full text-lg font-semibold hover:bg-yellow-600 transition duration-300">Create Account</a>
+		</div>
+	</div>
+</div>
+
+<div class="bg-gray-500 text-white py-8 p-10">
+	<div class="container mx-auto grid grid-cols- md:grid-cols-2 gap-8">
+		<div class="container mx-auto grid grid-cols- md:grid-cols-2 gap-8">
+			<div>
+				<img src="/static/img/main/book.jpeg" alt="Crescent City by Sarah J. Maas" class="object-cover rounded-md" style = "width: 250px; height: auto;">
+			</div>
+			<div>
+				<img src="/static/img/main/back.jpg" alt="Crescent City by Sarah J. Maas" class="object-cover rounded-md" style = "width: 250px; height: auto;">
+			</div>
+		</div>
+		<div>
+			<h2 class="text-2xl font-semibold">Featured Book Raffle</h2>
+			<h3 class="text-xl text-terracotta">Crescent City by Sarah J. Maas</h3>
+			<p class="text-lg my-4">
+			<strong>Summary:</strong> "Crescent City" is an enchanting fantasy novel that transports you to a magical world filled with adventure and intrigue. Follow Bryce Quinlan, a half-human, half-fae, as she navigates a city plagued by dark forces and unravels mysteries that could change everything.
+			</p>
+			<p class="text-lg">
+			<strong>Publication Date:</strong> March 3, 2020<br>
+			<strong>Publisher:</strong> Bloomsbury Publishing<br>
+			<strong>Author:</strong> Sarah J. Maas
+			</p>
+			<p class="text-lg my-4">
+			<strong>Participants in the Current Raffle:</strong> 254
+			</p>
+			<a href="#" class="bg-yellow-500 text-white py-4 px-4 rounded-full text-sm font-semibold hover:bg-yellow-600 transition duration-300">Participate Now</a>
+		</div>
+	</div>
+</div>
+
+<!-- Charitable Initiatives Section -->
+<div class="bg-gray-200 py-12">
+	<div class="container mx-auto p-10">
+		<h2 class="header-2-color text-3xl font-semibold text-center text-terracotta">Our Charitable Initiatives</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+			<!-- Initiative 1 -->
+			<div class="p-6">
+				<img src="/static/img/nduundune/nduundune_3.jpg" alt="Nduundune Primary School Feeding Program" class="w-full h-60 object-cover rounded-t-lg">
+				<h3 class="text-xl font-semibold my-4">Nduundune Primary School Feeding Program</h3>
+				<p class="text-lg">We support the Nduundune Primary School Feeding Program, ensuring that every child receives a nutritious meal, promoting their health and education.</p>
+			</div>
+			<!-- Initiative 2 -->
+			<div class="p-6">
+				<img src="/static/img/main/c_1.jpeg" alt="Alliance High School Endowment Fund Trust" class="w-full h-60 object-cover rounded-t-lg">
+				<h3 class="text-xl font-semibold my-4">Alliance High School Endowment Fund Trust</h3>
+				<p class="text-lg">We contribute to the Alliance High School Endowment Fund Trust, providing scholarships to needy students and opening doors to quality education.</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Testimonials Section -->
+<div class="bg-gray-100 py-4 pb-0">
+	<div class="container mx-auto p-4">
+		<h2 class="header-2-color text-3xl font-semibold text-center text-terracotta">What Our Participants Say</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+			<!-- Testimonial 1 -->
+			<div class="p-6 flex flex-col items-center">
+				<img src="/static/img/main/user.jpg" alt="Emily W" class="w-40 h-40 rounded-full mb-4">
+				<p class="text-lg text-center">"I won 'Crescent City' in the raffle and couldn't be happier. Not only did I get a great book, but I also contributed to charity. A fantastic initiative!"</p>
+				<p class="text-lg font-semibold mt-4">- Emily W.</p>
+			</div>
+
+			<!-- Testimonial 2 -->
+			<div class="p-6 flex flex-col items-center">
+				<img src="/static/img/main/user.jpg" alt="John D" class="w-40 h-40 rounded-full mb-4">
+				<p class="text-lg text-center">"{{ app_name }} has made it possible for me to support causes I care about while enjoying my love for reading. I've participated multiple times, and it's always a win-win."</p>
+				<p class="text-lg font-semibold mt-4">- John D.</p>
+			</div>
+
+			<!-- Testimonial 3 -->
+			<div class="p-6 flex flex-col items-center">
+				<img src="/static/img/main/user.jpg" alt="Sophia L" class="w-40 h-40 rounded-full mb-4">
+				<p class="text-lg text-center">"The impact of {{ app_name }} on education and healthcare is truly remarkable. It's a privilege to be a part of this community that creates positive change."</p>
+				<p class="text-lg font-semibold mt-4">- Sophia L.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Recent Winners Section -->
+<div class="bg-white-100 py-12 pt-0">
+	<div class="container mx-auto p-10">
+		<h2 class="text-3xl header-2-color font-semibold text-center">Recent Winners</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+			<div class="p-6">
+				<div class="flex items-center justify-between">
+					<h3 class="text-xl font-semibold">John Doe</h3>
+					<p class="text-lg font-semibold"><a href="#" class="text-blue-500 hover:underline">View Details</a></p>
+				</div>
+				<div class="mt-4">
+					<img src="/static/img/main/book.jpeg" alt="Recent Winner Book 1" class="w-full h-48 rounded-lg object-cover">
+				</div>
+				<p class="text-lg mt-4">Congratulations to our recent winner, John D.! He received the book "Crescent City" by Sarah J. Maas. "Crescent City" is a captivating fantasy novel that takes you on a thrilling adventure in a magical world filled with mysteries and intrigue.</p>
+			</div>
+
+			<!-- Recent Winner 2 -->
+			<div class="p-6">
+				<div class="flex items-center justify-between">
+					<h3 class="text-xl font-semibold">Jane Doe</h3>
+					<p class="text-lg font-semibold"><a href="#" class="text-blue-500 hover:underline">View Details</a></p>
+				</div>
+				<div class="mt-4">
+					<img src="/static/img/main/book.jpeg" alt="Recent Winner Book 2" class="w-full h-48 rounded-lg object-cover">
+				</div>
+				<p class="text-lg mt-4">Our recent winner, Emily W., was rewarded with the book "Mystic Waters" by Jane Doe. "Mystic Waters" is a thought-provoking novel that explores the depths of human emotions and relationships.</p>
+			</div>
+
+			<!-- Recent Winner 3 -->
+			<div class="p-6">
+				<div class="flex items-center justify-between">
+					<h3 class="text-xl font-semibold">Mark Johnson</h3>
+					<p class="text-lg font-semibold"><a href="#" class="text-blue-500 hover:underline">View Details</a></p>
+				</div>
+				<div class="mt-4">
+					<img src="/static/img/main/book.jpeg" alt="Recent Winner Book 3" class="w-full h-48 rounded-lg object-cover">
+				</div>
+				<p class="text-lg mt-4">Meet Sophia L., our recent winner of the book "Enchanted Forest" by Mark Johnson. "Enchanted Forest" is a magical journey that enchants readers with its whimsical storytelling and vivid imagination.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Social Media Section -->
+<div class="bg-gray-100 py-8 pt-0">
+	<div class="container mx-auto text-center pt-10">
+		<h2 class="text-3xl header-2-color font-semibold">Follow Us on Social Media</h2>
+		<div class="mt-6 flex justify-around items-center">
+			<!-- Facebook Icon/Link -->
+			<a href="#" class="text-blue-600 hover:text-blue-800 text-4xl md:text-5xl lg:text-6xl">
+				<i class="fab fa-facebook-square"></i>
+			</a>
+			<!-- WhatsApp Icon/Link -->
+			<a href="#" class="text-green-600 hover:text-green-800 text-4xl md:text-5xl lg:text-6xl">
+				<i class="fab fa-whatsapp-square"></i>
+			</a>
+			<!-- Twitter Icon/Link -->
+			<a href="#" class="text-blue-400 hover:text-blue-600 text-4xl md:text-5xl lg:text-6xl">
+				<i class="fab fa-twitter-square"></i>
+			</a>
+			<!-- Instagram Icon/Link -->
+			<a href="#" class="text-pink-600 hover:text-pink-800 text-4xl md:text-5xl lg:text-6xl">
+				<i class="fab fa-instagram-square"></i>
+			</a>
+			<!-- YouTube Icon/Link -->
+			<a href="#" class="text-red-600 hover:text-red-800 text-4xl md:text-5xl lg:text-6xl">
+				<i class="fab fa-youtube-square"></i>
+			</a>
+			<!-- TikTok Icon/Link -->
+			<a href="#" class="text-black hover:text-gray-800 text-4xl md:text-5xl lg:text-6xl">
+				<i class="fab fa-tiktok"></i>
+			</a>
+		</div>
+	</div>
+</div>
+
+<!-- Newsletter Signup Section -->
+<div class="bg-gray-100 py-12">
+	<div class="container mx-auto text-center">
+		<h2 class="text-3xl font-semibold header-2-color">Subscribe to Our Newsletter</h2>
+		<p class="text-lg my-6">Stay updated with the latest book raffles, author news, and charitable initiatives. Don't miss out!</p>
+		<form class="flex items-center justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+			<input type="email" placeholder="Enter your email" class="w-full md:w-2/3 lg:w-1/2 py-3 px-4 rounded-full border border-gray-300 focus:outline-none focus:border-blue-500 text-lg" />
+			<button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-full text-lg font-semibold transition duration-300">Subscribe</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

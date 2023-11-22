@@ -1,0 +1,112 @@
+{% extends "dashboard.html" %}
+{% block title %}
+Author Profile
+{% endblock %}
+{% block page_content %}
+<div class="p-2" id="authorProfile">
+	<!-- Data will be dynamically populated here -->
+</div>
+
+<!-- Display Associated books -->
+<h1 class="text-3xl text-gray-700 mt-4 text-center pb-6" style = "font-family: cursive;">Available Books</h1>
+<div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+</div>
+<!-- No Book Records Error Displays here -->
+<div id = "noBookRecordsError" style="display: flex; align-items: center; justify-content: center; height: 65vh;">
+</div>
+
+<!-- Javascript code -->
+<script>
+	author_id = {{ author_id }};
+	// Fetch data from the API endpoint
+          const serverName = '{{ api_server }}';
+	fetch(`${serverName}api/administration/authors/${author_id}`)
+		.then(response => response.json())
+		.then(data => {
+				// Dynamically populate the template with the fetched data
+				const authorProfile = document.getElementById('authorProfile');
+				const image = data.imageUrl || "/static/img/no-image.jpg";
+				authorProfile.innerHTML = `
+       <div class="p-2 bg-white">
+       <div class="">
+       <img class="w-48 h-48 rounded-full mx-auto" src="${image}" alt="">
+       <div class="mt-10 text-center border-b pb-6">
+       <h1 class="text-4xl font-medium text-gray-700">${data.firstName} ${data.middleName} ${data.lastName}</h1>
+       <p class="font-light text-gray-600 mt-3 text-xl">Nationality: ${data.nationality}</p>
+       <p class="font-light text-gray-600 mt-3 text-lg">${data.booksCount} books available</p>
+       </div>
+       <div class="mt-12 flex flex-col justify-center">
+       <p class="text-gray-600 text-center font-light lg:px-16">
+       ${data.summary}
+       </p>
+       </div>
+       </div>
+       </div>
+       `;
+
+			})
+		.catch(error => console.error('Error fetching data:', error));
+	// Fetch book data from the endpoint
+	fetch(`http://127.0.0.1:5001/api/administration/authors/${author_id}/books`)
+		.then(response => response.json())
+		.then(data => {
+				if (data.author_books) {
+						if (data.author_books.length == 0)
+						{
+								noBookRecordsErrorDiv = document.getElementById('noBookRecordsError');
+								noBookRecordsErrorDiv.innerHTML = `<img src="/static/img/empty.gif" class="" style="margin: 0 auto;">`; 
+							} else {
+									// Populate the cards with book data
+									data.author_books.forEach(bookData => {
+											const bookId = Object.keys(bookData)[0];
+											const book = bookData[bookId];
+
+											const card = document.createElement('div');
+											card.className = 'max-w-sm rounded bg-white overflow-hidden shadow-md flex flex-col sm:max-w-full h-full';
+
+											const imageUrl = book.imageUrl || 'https://via.placeholder.com/300';
+											const summaryLimit = 150; // Set the character limit for the summary
+
+											card.innerHTML = `
+       <div class="flex-grow">
+       <img class="w-full md:h-48 sm:h-64 lg:h-72 xl:h-56 object-cover" src="${imageUrl}" alt="${book.title}">
+       <div class="px-2 py-4">
+       <div class="font-bold text-md mb-2">${book.title}</div>
+       <p class="text-gray-700 text-base">${book.summary.slice(0, summaryLimit)}${book.summary.length > summaryLimit ? '...' : ''}</p>
+       </div>
+       </div>
+       <div class="px-2 pb-2 mt-auto">
+       <div class="mb-1">
+       <span class="block text-gray-500 text-sm font-semibold mb-1">Publisher:</span>
+       <span class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">${book.publisher}</span>
+       </div>
+       <div class="mb-1">
+       <span class="block text-gray-500 text-sm font-semibold mb-1">Year Published:</span>
+       <span class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">${book.yearPublished}</span>
+       </div>
+       <span class="block text-gray-500 text-sm font-semibold mb-1">Edition:</span>
+       <span class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">${book.edition}</span>
+       <div class="my-4">
+       <a href="${book.url}" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Explore</a>
+       </div>
+       </div>
+       `;
+
+
+											card.style.fontFamily = 'Inter, sans-serif';
+
+											// Append the card to the container
+											document.body.querySelector('.grid').appendChild(card);
+										});
+								}
+					} else {
+							console.error('Error fetching book data:', data);
+							alert('Error fetching book data. Please try again.');
+						}
+			})
+		.catch(error => {
+				console.error('Error fetching book data:', error);
+				alert('Error fetching book data. Please try again.');
+			});
+</script>
+{% endblock %}

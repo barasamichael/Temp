@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% block scripts %}
+		{{ moment.include_moment() }}
+		{% endblock scripts%}
+		<title>
+			{% block title %}{% endblock title%} - {{app_name|title}}
+		</title>
+
+		{% block head %}
+		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.jpg') }}" type="image/x-icon">
+		<link rel="icon" href="{{ url_for('static', filename='img/favicon.jpg') }}" type="image/x-icon">
+		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+		<link rel = "stylesheet" href = "/static/css/styles.css">
+		<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+		{% endblock head %}
+	</head>
+	<body>
+		{% block navbar %}
+		<!-- Navigation Bar -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous" />
+		<nav class="flex items-center bg-gray-800 p-3 flex-wrap">
+			<a href="{{ url_for('main.index') }}" style = "font-family: cursive" class="text-white text-xl font-semibold p-2 mr-4 inline-flex items-center">
+				{{ app_name }}
+			</a>
+			<button
+					class="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
+					data-target="#navigation"
+					>
+					<span class="sr-only">Open main menu</span>
+					<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+					</svg>
+			</button>
+			<div class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto md:flex " id="navigation">
+				<div class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
+					<a href="{{ url_for('main.about_us') }}" class="text-white py-2 px-4 hover:underline">About Us</a>
+					<!--a href="{{ url_for('main.how_it_works') }}" class="text-white py-2 px-4 hover:underline">Our OBRS</a -->
+					<a href="{{ url_for('main.faq') }}" class="text-white py-2 px-4 hover:underline">FAQ</a>
+					<a href="{{ url_for('main.contact_us') }}" class="text-white py-2 px-4 hover:underline">Contact Us</a>
+
+					{% if current_user.is_authenticated %}
+					<a href="{{ url_for('account.dashboard') }}" class="text-white py-2 px-4 hover:underline">Dashboard</a>
+					<a href="{{ url_for('authentication.logout') }}" class="text-white py-2 px-4 hover:underline">Logout</a>
+					{% else %}
+					<a href="{{ url_for('registration.register_user') }}" class="text-white py-2 px-4 hover:underline">Register</a>
+					<a href="{{ url_for('authentication.login') }}" class="text-white py-2 px-4 hover:underline">Login</a>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+
+		{% endblock navbar %}
+
+		{% block content %}
+		{% block page_content %}{% endblock page_content %}
+		{% endblock content %}
+
+		{% block footer %}
+		<!-- Footer -->
+		<footer class="bg-gray-800 text-white">
+			<div class="container mx-auto py-6 p-10">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<div>
+						<h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+						<ul>
+							<li><a href="{{ url_for('main.about_us') }}">About Us</a></li>
+							<!--li><a href="{{ url_for('main.how_it_works') }}">How It Works</a></li -->
+							<li><a href="{{ url_for('main.faq') }}">FAQ</a></li>
+							<li><a href="#">Terms and Conditions</a></li>
+							<li><a href="{{ url_for('main.contact_us') }}">Contact Us</a></li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-xl font-semibold mb-4">Contact Information</h3>
+						<p>Email: info@obrs.com</p>
+						<p>Phone: +254 114 742 348</p>
+					</div>
+					<div>
+						<h3 class="text-xl font-semibold mb-4">Copyright</h3>
+						<p>&copy; 2023 {{ app_name }}. All rights reserved.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		{% endblock footer %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function() {
+							$(".nav-toggler").each(function(_, navToggler) {
+											var target = $(navToggler).data("target");
+											$(navToggler).on("click", function() {
+															$(target).animate({
+																			height: "toggle"
+																		});
+														});
+										});
+						});
+
+		</script>
+	</body>
+</html>

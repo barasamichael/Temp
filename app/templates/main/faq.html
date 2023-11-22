@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}
+Frequently Asked Questions
+{% endblock %}
+
+{% block page_content %}
+<style>
+</style>
+<div class="bg-white py-4 px-2 text-gray-800">
+	<div class="faq-container">
+		<h1 class="text-3xl header-2-color font-semibold mb-6 text-center">Frequently Asked Questions (FAQ)</h1>
+		<p class="mb-4 text-center">Welcome to our FAQ page. We've compiled answers to common questions about our platform, how it works, and what you can expect when participating in book raffles. If you have a question that isn't covered here, feel free to <a href="{{ url_for('main.contact_us') }}" class="contact-link">Contact Us</a> for further assistance.</p>
+
+		<!-- General Questions -->
+		<section class="faq-section">
+			<h2 class="text-2xl header-3-color font-semibold mb-4">General Questions</h2>
+			<div class = "faq-group">
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">What is the {{ app_name }}'s OBRS?</p>
+					<p class="faq-answer">It is a web-based platform designed to promote a reading culture, support Kenyan authors, and raise funds for charitable causes through book raffles.</p>
+				</div>
+
+				<!-- Q2 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">How does it work?</p>
+					<p class="faq-answer">It allows users to purchase raffle tickets for a chance to win books. Participants can browse a selection of books, purchase tickets, and, when the required participant count is reached, a winner is randomly selected.</p>
+				</div>
+
+				<!-- Q3 -->
+				<div class="mb-4 faq-item no-border-bottom">
+					<p class="faq-question text-lg">Is the OBRS legal and regulated?</p>
+					<p class="faq-answer">Yes, the OBRS adheres to all necessary regulations set forth by the Betting Control and Licensing Board, ensuring a legal and ethical operation.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Account and Registration -->
+		<section class="faq-section">
+			<h2 class="text-2xl font-semibold header-3-color mb-4">Account and Registration</h2>
+			<div class = "faq-group">
+				<!-- Q4 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">How do I register on the OBRS?</p>
+					<p class="faq-answer">To register, click on the "Sign Up" button and provide your name, email address, and create a password.</p>
+				</div>
+
+				<!-- Q5 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">Is registration free?</p>
+					<p class="faq-answer">Yes, registration on the OBRS is free.</p>
+				</div>
+
+				<!-- Q6 -->
+				<div class="mb-4 faq-item  no-border-bottom">
+					<p class="faq-question text-lg">Can I change my account information?</p>
+					<p class="faq-answer">You can update your account information by accessing your profile settings after logging in.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Book Raffles -->
+		<section class="faq-section">
+			<h2 class="text-2xl font-semibold header-3-color mb-4">Book Raffles</h2>
+			<div class = "faq-group">
+				<!-- Q7 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">How can I participate in a book raffle?</p>
+					<p class="faq-answer">To participate, browse the available books, select a book, and purchase raffle tickets. Once the required participant count is reached, a random draw is conducted.</p>
+				</div>
+
+				<!-- Q8 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">How much do raffle tickets cost?</p>
+					<p class="faq-answer">The price of raffle tickets may vary for each book. The ticket price is displayed on the book's raffle page.</p>
+				</div>
+
+				<!-- Q9 -->
+				<div class="mb-4 faq-item no-border-bottom">
+					<p class="faq-question text-lg">How are winners selected?</p>
+					<p class="faq-answer">Winners are selected through a random draw when the required number of participants is met.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Charitable Contributions -->
+		<section class="faq-section">
+			<h2 class="text-2xl font-semibold header-3-color mb-4">Charitable Contributions</h2>
+			<div class = "faq-group">
+				<!-- Q10 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">How are charitable contributions made?</p>
+					<p class="faq-answer">A percentage of the proceeds from each raffle goes towards supporting charitable initiatives, as indicated on the raffle page.</p>
+				</div>
+
+				<!-- Q11 -->
+				<div class="mb-4 faq-item no-border-bottom">
+					<p class="faq-question text-lg">Can I choose which charity receives the contribution from my raffle ticket purchase?</p>
+					<p class="faq-answer">Charitable contributions are directed to the specified charitable causes as outlined on each raffle page.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact and Support -->
+		<section class="faq-section">
+			<h2 class="text-2xl header-3-color font-semibold mb-4">Contact and Support</h2>
+			<div class = "faq-group">
+				<!-- Q12 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">How can I contact the {{ app_name }} for assistance?</p>
+					<p class="faq-answer">You can reach our support team through <a href="mailto:support@example.com" class="contact-link">support@example.com</a> or by calling <span class="contact-link">[Phone Number]</span>. You can also use our Contact Form on the <a href="{{ url_for('main.contact_us') }}" class="contact-link">Contact Us</a> page.</p>
+				</div>
+
+				<!-- Q13 -->
+				<div class="mb-4 faq-item no-border-bottom">
+					<p class="faq-question text-lg">What are your support hours?</p>
+					<p class="faq-answer">Our customer support is available during our regular business hours to assist you with any inquiries or issues.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Privacy and Security -->
+		<section class="faq-section">
+			<h2 class="text-2xl font-semibold header-3-color mb-4">Privacy and Security</h2>
+			<div class = "faq-group">
+				<!-- Q14 -->
+				<div class="mb-4 faq-item">
+					<p class="faq-question text-lg">Is my personal information secure on the OBRS?</p>
+					<p class="faq-answer">We take your privacy seriously. Your personal information is handled in accordance with our <a href="{{ url_for('main.privacy_policy') }}" class="contact-link">Privacy Policy</a>.</p>
+				</div>
+
+				<!-- Q15 -->
+				<div class="mb-4 faq-item no-border-bottom">
+					<p class="faq-question text-lg">Are my payment details safe when purchasing raffle tickets?</p>
+					<p class="faq-answer">We use secure payment processing to protect your payment information. Your transactions are encrypted to ensure your data remains secure.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Terms and Conditions -->
+		<section class="faq-section">
+			<h2 class="text-2xl font-semibold header-3-color mb-4">Terms and Conditions</h2>
+			<div class = "faq-group">
+				<!-- Q16 -->
+				<div class="mb-4 faq-item no-border-bottom">
+					<p class="faq-question text-lg">Where can I find the Terms and Conditions of the OBRS?</p>
+					<p class="faq-answer">Our Terms and Conditions can be accessed from the footer of our website.</p>
+				</div>
+			</div>
+		</section>
+
+		<p class="footer-text text-center">Thank you for visiting the {{ app_name }} FAQ page. We hope this information has been helpful. If you have any further questions or require assistance, please do not hesitate to <a href="{{ url_for('main.contact_us')}}" class="contact-link">Contact Us</a>.</p>
+
+	</div>
+</div>
+{% endblock %}

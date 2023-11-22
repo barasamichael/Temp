@@ -1,0 +1,129 @@
+{% extends "dashboard.html" %}
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block page_content %}
+<h1 class="text-3xl text-black pb-4 text-center" style = "font-family: cursive;">Welcome to the Dashboard</h1>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-8 text-center">
+	<!-- User Management -->
+	<a href="{{ url_for('account.view_users') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-users text-black-600 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">User Management</span>
+	</a>
+
+	<!-- Book Management -->
+	<a href="{{ url_for('account.view_books') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-book text-gray-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Book Management</span>
+	</a>
+
+	<!-- Authors Management -->
+	<a href="{{ url_for('account.view_authors') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-feather text-blue-700 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Author Management</span>
+	</a>
+
+	<!-- Book Category Management -->
+	<a href="{{ url_for('account.view_categories') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-folder text-yellow-300 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Book Category Management</span>
+	</a>
+
+	<!-- Raffles Management -->
+	<a href="{{ url_for('account.view_raffles') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-gift text-red-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Raffle Management</span>
+	</a>
+
+	<!-- Tickets Management -->
+	<a href="{{ url_for('account.view_tickets') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-ticket-alt text-green-600 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Tickets Management</span>
+	</a>
+
+	<!-- Explore Authors -->
+	<a href="{{ url_for('account.explore_authors') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-pen text-red-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Explore Authors</span>
+	</a>
+
+	<!-- Explore Books -->
+	<a href="{{ url_for('account.explore_books') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-book-open text-yellow-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Explore Books</span>
+	</a>
+
+	<!-- Explore Raffles -->
+	<a href="{{ url_for('account.explore_raffles') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-gift text-yellow-300 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Explore Active Raffles</span>
+	</a>
+
+	<!-- Tickets -->
+	<a href="{{ url_for('account.explore_tickets') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-hourglass-half text-green-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">My Tickets</span>
+	</a>
+
+	<!-- Won Raffles -->
+	<a href="{{ url_for('account.won_raffles') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-trophy text-blue-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Won Raffles</span>
+	</a>
+
+	<!-- Explore Winners -->
+	<a href="{{ url_for('account.explore_winners') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-trophy text-purple-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Explore Winners</span>
+	</a>
+
+	<!-- Past Raffles -->
+	<a href="{{ url_for('account.past_raffles') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-history text-purple-800 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Past Raffles</span>
+	</a>
+
+	<!-- Reports -->
+	<a href="{{ url_for('account.reports') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-chart-bar text-black-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Reports</span>
+	</a>
+
+	<!-- View Profile -->
+	<a href="{{ url_for('account.view_profile') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-user text-gray-600 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">View Profile</span>
+	</a>
+
+	<!-- Transactions History -->
+	<a href="{{ url_for('account.view_transactions') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-history text-red-600 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Transactions History</span>
+	</a>
+
+	<!-- Account Settings -->
+	<a href="{{ url_for('account.settings') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-cogs text-black-600 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Account Settings</span>
+	</a>
+
+	<!-- Gallery -->
+	<a href="{{ url_for('account.gallery') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-images text-pink-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Gallery</span>
+	</a>
+
+	<!-- Events -->
+	<a href="{{ url_for('account.explore_events') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-calendar-alt text-green-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Events</span>
+	</a>
+
+	<!-- Notifications -->
+	<a href="{{ url_for('account.notifications') }}" class="dashboard-item flex flex-col items-center justify-center p-8 bg-white transition-transform hover:scale-105">
+		<i class="fas fa-bell text-red-500 text-5xl mb-4"></i>
+		<span class="text-lg font-semibold text-gray-600">Notifications</span>
+	</a>
+</div>
+{% endblock %}
