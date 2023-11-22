@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}
+Upload Image
+{% endblock %}
+
+{% block page_content %}
+<h2>Upload User Image</h2>
+
+<form id="uploadForm">
+	<label for="imageFile">Select Image:</label>
+	<input type="file" id="imageFile" name="file" accept="image/*">
+	<button type="button" onclick="uploadImage()">Upload</button>
+</form>
+
+<script>
+	function uploadImage() {
+			const userId = 1; // Replace with the actual user ID
+			const fileInput = document.getElementById('imageFile');
+			const file = fileInput.files[0];
+
+			if (!file) {
+					alert("Please select a file to upload.");
+					return;
+				}
+
+			const formData = new FormData();
+			formData.append('file', file);
+
+			fetch(`/api/administration/users/${userId}/upload-image`, {
+					method: 'POST',
+					body: formData,
+				})
+				.then(response => {
+						if (!response.ok) {
+								throw new Error(`HTTP error! Status: ${response.status}`);
+							}
+						return response.json();
+					})
+				.then(data => {
+						console.log(data.message); // Log success message
+					})
+				.catch(error => {
+						console.error('Error:', error);
+						alert("An error occurred while uploading the image.");
+					});
+		}
+</script>
+{% endblock page_content %}

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block page_content %}
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+		.container {
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			padding: 30px;
+			margin-top: 50px;
+		}
+
+		h2 {
+			color: #007bff;
+		}
+
+		button {
+			background-color: #007bff;
+			color: #ffffff;
+		}
+</style>
+
+<div class="container mt-5">
+	<h2 class="mb-4">User Registration</h2>
+	<form id="registrationForm">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="firstName">First Name:</label>
+				<input type="text" class="form-control" id="firstName" name="firstName" required>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="lastName">Last Name:</label>
+				<input type="text" class="form-control" id="lastName" name="lastName" required>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="emailAddress">Email Address:</label>
+			<input type="email" class="form-control" id="emailAddress" name="emailAddress" required>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="phoneNumber">Phone Number:</label>
+				<input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="gender">Gender:</label>
+				<select class="form-control" id="gender" name="gender" required>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+					<option value="other">Other</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="password">Password:</label>
+			<input type="password" class="form-control" id="password" name="password" required>
+		</div>
+
+		<div class="form-group">
+			<label for="middleName">Middle Name:</label>
+			<input type="text" class="form-control" id="middleName" name="middleName">
+		</div>
+
+		<div class="form-group">
+			<label for="nationality">Nationality:</label>
+			<input type="text" class="form-control" id="nationality" name="nationality" required>
+		</div>
+
+		<button type="button" class="btn btn-primary" onclick="registerUser()">Register</button>
+	</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<script>
+	function registerUser() {
+			// Fetch form data
+			const formData = {
+					firstName: document.getElementById('firstName').value,
+					lastName: document.getElementById('lastName').value,
+					emailAddress: document.getElementById('emailAddress').value,
+					phoneNumber: document.getElementById('phoneNumber').value,
+					gender: document.getElementById('gender').value,
+					password: document.getElementById('password').value,
+					middleName: document.getElementById('middleName').value,
+					nationality: document.getElementById('nationality').value,
+				};
+
+			// Make a POST request to your Flask API
+			fetch('/api/registration/register', {
+					method: 'POST',
+					headers: {
+							'Content-Type': 'application/json',
+						},
+					body: JSON.stringify(formData),
+				})
+				.then(response => response.json())
+				.then(data => {
+						if (data.error) {
+								alert('Error: ' + data.error);
+							} else {
+									alert('User registered successfully');
+									// Redirect or perform any other action after successful registration
+								}
+					})
+				.catch(error => {
+						console.error('Error:', error);
+						alert('An error occurred during registration');
+					});
+		}
+</script>
+{% endblock page_content %}

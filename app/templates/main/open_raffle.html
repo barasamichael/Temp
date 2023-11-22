@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+Upload Image
+{% endblock %}
+
+{% block page_content %}
+<h1>Create Raffle</h1>
+<form id="raffleForm">
+	<label for="participantLimit">Participant Limit:</label>
+	<input type="number" id="participantLimit" name="participantLimit" required>
+
+	<label for="bookId">Book ID:</label>
+	<input type="number" id="bookId" name="bookId" required>
+	
+	<label for="price">Price:</label>
+	<input type="number" id="price" name="price" required>
+
+	<button type="button" onclick="createRaffle()">Create Raffle</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+	async function createRaffle() {
+			const form = document.getElementById('raffleForm');
+			const resultDiv = document.getElementById('result');
+
+			try {
+					// Create a FormData object to collect form data
+					const formData = new FormData(form);
+
+					// Make a POST request using the Fetch API
+					const response = await fetch('/api/administration/raffles', {
+							method: 'POST',
+							body: JSON.stringify(Object.fromEntries(formData.entries())),
+							headers: {
+									'Content-Type': 'application/json',
+								},
+						});
+
+					// Parse the JSON response
+					const result = await response.json();
+
+					// Display the result
+					resultDiv.innerHTML = `<p>${result.message}</p>`;
+				} catch (error) {
+						console.error('Error creating raffle:', error);
+						resultDiv.innerHTML = '<p>An error occurred while creating the raffle.</p>';
+					}
+		}
+</script>
+
+{% endblock page_content %}

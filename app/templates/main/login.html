@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block page_content %}
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+		.container {
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			padding: 30px;
+			margin-top: 50px;
+		}
+
+		h2 {
+			color: #007bff;
+		}
+
+		button {
+			background-color: #007bff;
+			color: #ffffff;
+		}
+</style>
+<div class="container mt-5">
+	<h2 class="mb-4">User Login</h2>
+	<form id="loginForm">
+		<div class="form-group">
+			<label for="emailAddress">Email Address:</label>
+			<input type="email" class="form-control" id="emailAddress" name="emailAddress" required>
+		</div>
+
+		<div class="form-group">
+			<label for="password">Password:</label>
+			<input type="password" class="form-control" id="password" name="password" required>
+		</div>
+
+		<button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
+	</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<script>
+	function loginUser() {
+			// Fetch form data
+			const formData = {
+					emailAddress: document.getElementById('emailAddress').value,
+					password: document.getElementById('password').value,
+				};
+
+			// Make a POST request to your Flask API for login
+			fetch('/api/authentication/login', {
+					method: 'POST',
+					headers: {
+							'Content-Type': 'application/json',
+						},
+					body: JSON.stringify(formData),
+				})
+				.then(response => response.json())
+				.then(data => {
+						if (data.error) {
+								alert('Error: ' + data.error);
+							} else {
+									alert('Login successful');
+									window.location.replace('/');
+								}
+					})
+				.catch(error => {
+						console.error('Error:', error);
+						alert('An error occurred during login');
+					});
+		}
+</script>
+{% endblock page_content %}
